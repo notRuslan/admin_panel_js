@@ -26,7 +26,7 @@ export default class Page {
 
     const sortableTable = new SortableTable(header, {
       url: `api/rest/orders?_start=0&_end=30&_order=desc&createdAt_gte=${from.toISOString()}&createdAt_lte=${to.toISOString()}`,
-      isSortLocally: false,
+      // isSortLocally: false,
       // step: 20,
       // start: 1,
       // end: 21
@@ -38,7 +38,7 @@ export default class Page {
   }
 
   get template(){
-    console.log('SSSSSSSSSSSSSS');
+    console.log('template_sales');
     return `
       <div class="sales">
       <div class="content__top-panel">
@@ -98,7 +98,9 @@ export default class Page {
     this.components.rangePicker.element.addEventListener('date-select', event => {
       const { from, to } = event.detail;
       this.updateTableComponent(from, to);
-    });
+    }
+    );
+    this.components.sortableTable.element.addEventListener('scroll', this.components.sortableTable.element.onWindowScroll);
   }
 
 }
